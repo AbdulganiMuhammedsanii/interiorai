@@ -10,20 +10,27 @@ import {
   Box,
   Card,
   CardMedia,
+  IconButton,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
+import MenuIcon from "@mui/icons-material/Menu";
 
 export default function Home() {
   const [displayedText, setDisplayedText] = useState("");
-  const fullText = "ddark grunge bedroom with high ceilings and dark hardwood floors and massive black bed and two elegant nightstands on both sides of the bed.";
-  const imageSources = [ "images/generation.webp", "/replicate(2).jpg", "/replicate(3).jpg", "/replicate(4).jpg", ];
+  const fullText ="AA moody bedroom with high ceilings, dark hardwood floors, a grand black bed, and elegant nightstands on either side."
+  const imageSources = [
+    "images/generation.webp",
+    "/replicate(2).jpg",
+    "/replicate(3).jpg",
+    "/replicate(4).jpg",
+  ];
   const router = useRouter();
   const [isPropagating, setIsPropagating] = useState(false);
 
   // Text propagation effect
   useEffect(() => {
     let currentIndex = 0;
-    setIsPropagating(true); // Disable buttons when text propagation starts
+    setIsPropagating(true);
 
     const intervalId = setInterval(() => {
       if (currentIndex < fullText.length - 1) {
@@ -31,9 +38,9 @@ export default function Home() {
         currentIndex += 1;
       } else {
         clearInterval(intervalId);
-        setIsPropagating(false); // Re-enable buttons when text propagation is done
+        setIsPropagating(false);
       }
-    }, 25); // Adjust delay between each character
+    }, 25);
 
     return () => clearInterval(intervalId);
   }, [fullText]);
@@ -48,68 +55,125 @@ export default function Home() {
 
   return (
     <Box>
-      <AppBar position="static" color="success" elevation={4} sx={{ backgroundColor: "#b8e994" }}>
-        <Toolbar>
+      {/* Stunning App Bar with gradient and cool hover effects */}
+      <AppBar
+        position="static"
+        sx={{
+          background: "linear-gradient(45deg, #1e3c72, #2a5298)",
+          padding: "10px 0",
+          boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
+        }}
+      >
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography
-            variant="h6"
+            variant="h5"
             sx={{
-              flexGrow: 1,
+              fontSize: "2rem",
               fontWeight: "bold",
               color: "white",
               cursor: "pointer",
-              "&:hover": { color: "lightgray" },
+              transition: "color 0.3s",
+              "&:hover": { color: "#f1c40f" },
             }}
           >
             Interior AI
           </Typography>
-          <Button
-            color="inherit"
-            sx={{ mx: 1, color: "white", "&:hover": { color: "lightgray" } }}
-            onClick={goToServices}
-            disabled={isPropagating} // Disable button during propagation
-          >
-            Services
-          </Button>
-          <Button
-            color="inherit"
-            sx={{ mx: 1, color: "white", "&:hover": { color: "lightgray" } }}
-            onClick={goToAbout}
-            disabled={isPropagating} // Disable button during propagation
-          >
-            About
-          </Button>
+          <Box>
+            <Button
+              sx={{
+                mx: 1,
+                fontSize: "1.2rem",
+                fontWeight: "bold",
+                color: "white",
+                transition: "color 0.3s",
+                "&:hover": { color: "#f1c40f" },
+              }}
+              onClick={goToServices}
+              disabled={isPropagating}
+            >
+              Services
+            </Button>
+            <Button
+              sx={{
+                mx: 1,
+                fontSize: "1.2rem",
+                fontWeight: "bold",
+                color: "white",
+                transition: "color 0.3s",
+                "&:hover": { color: "#f1c40f" },
+              }}
+              onClick={goToAbout}
+              disabled={isPropagating}
+            >
+              About
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
 
-      {/* Main section with Title, Text Propagation, and Image */}
-      <Box sx={{ backgroundColor: "white", py: 8 }}>
+      {/* Main section with aesthetic layout */}
+      <Box sx={{ backgroundColor: "#f5f5f5", py: 8 }}>
         <Container maxWidth="lg">
-          <Grid container spacing={4}>
+          <Grid container spacing={4} alignItems="center">
             <Grid item xs={12} md={6}>
               <Typography
                 variant="h3"
                 component="h2"
                 gutterBottom
-                sx={{ fontWeight: "bold", color: "#333", mb: 4 }}
+                sx={{
+                  fontWeight: "bold",
+                  color: "#333",
+                  mb: 4,
+                  fontFamily: "'Poppins', sans-serif",
+                }}
               >
-                Interior Design Visualization
+                Elegant Interior Design Visualization
               </Typography>
               <Typography
                 variant="h4"
                 component="h1"
                 gutterBottom
-                sx={{ fontWeight: "bold", color: "#333", mt: 8 }} // Push the text down
+                sx={{
+                  fontWeight: "400",
+                  color: "#666",
+                  mt: 8,
+                  fontFamily: "'Poppins', sans-serif",
+                  lineHeight: "1.6",
+                }}
               >
                 {displayedText}
               </Typography>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Box sx={{ position: "relative", height: "520px", overflow: "hidden" }}>
-                <Box sx={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}>
+              <Box
+                sx={{
+                  position: "relative",
+                  height: "520px",
+                  borderRadius: "16px",
+                  overflow: "hidden",
+                  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
+                }}
+              >
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    transition: "transform 0.5s ease-in-out",
+                    "&:hover": { transform: "scale(1.05)" },
+                  }}
+                >
                   <img
                     src="images/generation.webp"
-                    alt="Original"
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    alt="Interior Design Visualization"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: "16px",
+                    }}
                   />
                 </Box>
               </Box>
