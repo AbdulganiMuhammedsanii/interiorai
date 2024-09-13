@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 
-export default function PaymentPage() {
+export default function PaymentPage() : JSX.Element {
   const router = useRouter();
 
   const handlePayment = () => {

@@ -15,24 +15,25 @@ import {
 import { useRouter } from "next/navigation";
 import MenuIcon from "@mui/icons-material/Menu";
 
-export default function Home() {
-  const [displayedText, setDisplayedText] = useState("");
-  const fullText ="AA moody bedroom with high ceilings, dark hardwood floors, a grand black bed, and elegant nightstands on either side."
-  const imageSources = [
+export default function Home(): JSX.Element {
+  const [displayedText, setDisplayedText] = useState<string>("");
+  const fullText: string =
+    "A moody bedroom with high ceilings, dark hardwood floors, a grand black bed, and elegant nightstands on either side.";
+  const imageSources: string[] = [
     "images/generation.webp",
     "/replicate(2).jpg",
     "/replicate(3).jpg",
     "/replicate(4).jpg",
   ];
   const router = useRouter();
-  const [isPropagating, setIsPropagating] = useState(false);
+  const [isPropagating, setIsPropagating] = useState<boolean>(false);
 
   // Text propagation effect
   useEffect(() => {
-    let currentIndex = 0;
+    let currentIndex: number = 0;
     setIsPropagating(true);
 
-    const intervalId = setInterval(() => {
+    const intervalId: ReturnType<typeof setInterval> = setInterval(() => {
       if (currentIndex < fullText.length - 1) {
         setDisplayedText((prev) => prev + fullText[currentIndex]);
         currentIndex += 1;
@@ -45,11 +46,11 @@ export default function Home() {
     return () => clearInterval(intervalId);
   }, [fullText]);
 
-  const goToAbout = () => {
+  const goToAbout = (): void => {
     if (!isPropagating) router.push("/about");
   };
 
-  const goToServices = () => {
+  const goToServices = (): void => {
     if (!isPropagating) router.push("/services");
   };
 

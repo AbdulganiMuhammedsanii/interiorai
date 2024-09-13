@@ -13,10 +13,10 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 
-export default function AboutPage() {
+export default function AboutPage() : JSX.Element {
   const router = useRouter();
 
-  const handleNavigation = (path) => {
+  const handleNavigation = (path: string) => {
     router.push(path);
   };
 
