@@ -27,6 +27,7 @@ export default function Home(): JSX.Element {
   ];
   const router = useRouter();
   const [isPropagating, setIsPropagating] = useState<boolean>(false);
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
 
   // Text propagation effect
   useEffect(() => {
@@ -40,11 +41,17 @@ export default function Home(): JSX.Element {
       } else {
         clearInterval(intervalId);
         setIsPropagating(false);
+        setIsCompleted(true);
       }
     }, 25);
 
     return () => clearInterval(intervalId);
   }, [fullText]);
+
+  const goToTryItOut = (): void => {
+    if (!isPropagating) router.push("/try-it-out");
+  };
+
 
   const goToAbout = (): void => {
     if (!isPropagating) router.push("/about");
@@ -144,6 +151,16 @@ export default function Home(): JSX.Element {
               >
                 {displayedText}
               </Typography>
+              {isCompleted && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{ mt: 4 }}
+                  onClick={goToTryItOut}
+                >
+                  Try it Out
+                </Button>
+              )}
             </Grid>
             <Grid item xs={12} md={6}>
               <Box
