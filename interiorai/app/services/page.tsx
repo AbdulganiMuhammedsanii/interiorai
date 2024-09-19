@@ -13,18 +13,37 @@ import {
   CardActions,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { loadStripe } from "@stripe/stripe-js";
 
-export default function PaymentPage() : JSX.Element {
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+
+export default function PaymentPage(): JSX.Element {
   const router = useRouter();
 
-  const handlePayment = () => {
-    // Add your payment logic here (e.g., Stripe integration)
-    alert("Payment processing for $10 for unlimited generations.");
+  const handlePayment = async () => {
+    const stripe = await stripePromise;
+
+    // Call the backend route to create a checkout session
+    const res = await fetch("/api/create-checkout-session", {
+      method: "POST",
+    });
+
+    const session = await res.json();
+
+    // Redirect to Stripe Checkout
+    if (stripe) {
+      const { error } = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+
+      if (error) {
+        console.error("Stripe checkout error:", error);
+      }
+    }
   };
 
   return (
     <Box>
-      {/* Aesthetic App Bar */}
       <AppBar
         position="static"
         sx={{
@@ -79,7 +98,6 @@ export default function PaymentPage() : JSX.Element {
         </Toolbar>
       </AppBar>
 
-      {/* Payment Section */}
       <Box sx={{ backgroundColor: "#f5f5f5", py: 8 }}>
         <Container maxWidth="sm">
           <Grid container spacing={4} justifyContent="center">
