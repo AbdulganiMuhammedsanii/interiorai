@@ -57,9 +57,6 @@ export default function Home(): JSX.Element {
     if (!isPropagating) router.push("/about");
   };
 
-  const goToServices = (): void => {
-    if (!isPropagating) router.push("/services");
-  };
 
   return (
     <Box>
@@ -87,20 +84,6 @@ export default function Home(): JSX.Element {
             Interior AI
           </Typography>
           <Box>
-            <Button
-              sx={{
-                mx: 1,
-                fontSize: "1.2rem",
-                fontWeight: "bold",
-                color: "white",
-                transition: "color 0.3s",
-                "&:hover": { color: "#f1c40f" },
-              }}
-              onClick={goToServices}
-              disabled={isPropagating}
-            >
-              Services
-            </Button>
             <Button
               sx={{
                 mx: 1,

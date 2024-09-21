@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 
-export default function AboutPage() : JSX.Element {
+export default function AboutPage(): JSX.Element {
   const router = useRouter();
 
   const handleNavigation = (path: string) => {
@@ -47,19 +47,6 @@ export default function AboutPage() : JSX.Element {
             Interior AI
           </Typography>
           <Box>
-            <Button
-              sx={{
-                mx: 1,
-                fontSize: "1.2rem",
-                fontWeight: "bold",
-                color: "white",
-                transition: "color 0.3s",
-                "&:hover": { color: "#f1c40f" },
-              }}
-              onClick={() => handleNavigation("/services")}
-            >
-              Services
-            </Button>
             <Button
               sx={{
                 mx: 1,
@@ -137,7 +124,7 @@ export default function AboutPage() : JSX.Element {
               >
                 <CardMedia
                   component="img"
-                  image="images/cottagefeel.webp"  
+                  image="images/cottagefeel.webp"
                   alt="AI-generated cottage example"
                   sx={{
                     width: "100%",
@@ -164,7 +151,7 @@ export default function AboutPage() : JSX.Element {
               >
                 <CardMedia
                   component="img"
-                  image="images/1920sclassy.webp" 
+                  image="images/1920sclassy.webp"
                   alt="AI-generated classy example"
                   sx={{
                     width: "100%",
